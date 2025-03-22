@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment-process-movement
+  labels:
+    app: service-process-movement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-process-movement
+  template:
+    metadata:
+      labels:
+        app: service-process-movement
+    spec:
+      containers:
+      - name: app-process-movement
+        image: polyglotxt/nodejs-aws-process-movement:1
+        env:
+        - name: KAFKA_SERVER
+          value: "52.20.227.206:9092"
+        - name: DB_MONGO_URI
+          value: "mongodb://polyglot:Polyglot3000@52.20.227.206:27018"
+        - name: DB_MONGO_DATABASE_MOVEMENT
+          value: "DB_MOVEMENT"
+
